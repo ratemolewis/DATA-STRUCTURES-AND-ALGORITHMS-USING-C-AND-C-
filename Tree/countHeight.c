@@ -198,14 +198,24 @@ void LevelOrder(struct Node *root)// this same as inorder traversal
 
 int count(struct Node *root)//counts number of nodes
 {
-    int x=0, y=0;
-    if(root)
-    {
-        x=count(root->lchild);
-        y=count(root->rchild);
-        return x+y+1;
-    }
-    return 0;
+    // int x=0, y=0;
+    // if(root)
+    // {
+    //     x=count(root->lchild);
+    //     y=count(root->rchild);
+    //     return x+y+1;
+    // }
+    // return 0;
+    //method 2 without x and y variables
+    if(root==NULL)
+        return 0;
+    //if(root->lchild && root->rchild)//count nodes with degree 2 
+   // if(!root->lchild && !root->rchild)//count leaf nodes degree 0
+   // if(root->lchild || root->rchild)//count nodes with degree 1 or 2
+    if(root->lchild != NULL ^ root->rchild != NULL)// count nodes with degree 1
+        return count(root->lchild)+count(root->rchild)+1;
+    return count(root->lchild)+count(root->rchild);
+
 }
 
 int height(struct Node *root)
