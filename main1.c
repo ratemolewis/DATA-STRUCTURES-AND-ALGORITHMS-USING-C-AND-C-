@@ -4,7 +4,7 @@
     //full condition -> if(rear==size-1).
    // empty condition -> if(front==rear).
 //time complexity:
-    //enqueue and dequeue -> O(1)/constant time
+    //enqueue and dequeue -> O(1)/constant tim
 
 struct Queue
 {
