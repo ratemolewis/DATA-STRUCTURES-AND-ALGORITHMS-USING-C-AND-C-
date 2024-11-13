@@ -32,9 +32,9 @@ void Bubble(int A[], int n)
 
 void Insertion(int A[], int n)//it's best suited for linked list; no shifting of elements
 //No. of passes is n-1
-//No. of comparisons is n(n-1)/2=T=O(n^2)
-//No. of swaps is n(n-1)/2=O(n^2)
-//N/B it's adabtable and stable by default
+//Bets case(sorted list) O(n)
+//Worst case(reverse order data) O(n^2)
+//N/B it's adabtive and stable by default
 {
     int i,j,x;
    
@@ -51,11 +51,29 @@ void Insertion(int A[], int n)//it's best suited for linked list; no shifting of
      A[j+1]=x;//copy the x elemnt to the right place
    }
 }
+
+void SelectionSort(int A[],int n)
+//No. of comparisons )=T=(n^2) 
+//No. of swaps O(n)
+//not statble and adaptive
+//Intermediate result are useful
+{
+    int i,k,j;
+    for(i=0;i<n;i++)//for selection a position to be filled
+    {
+        for(j=k=i;j<n;j++)
+        {
+            if(A[j]<A[k])//if the elem at j is smaller than that at k, bring k to j
+              k=j;
+        }
+        swap(&A[i],&A[k]);//at the end of the inner loop k will be pointing at the smallest elem; swap with i
+    }
+}
 int main()
 {
-    int A[]={11,13,7,2,6,9,4,5,10,3}, n=10, i;
+    int A[]={11,13,7,12,16,9,24,5,10,3}, n=10, i;
 
-Insertion(A,n);
+SelectionSort(A,n);
 
 for(i=0;i<10;i++)
  printf("%d ", A[i]);
