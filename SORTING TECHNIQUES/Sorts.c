@@ -29,13 +29,35 @@ void Bubble(int A[], int n)
         }
     }
 }
+
+void Insertion(int A[], int n)//it's best suited for linked list; no shifting of elements
+//No. of passes is n-1
+//No. of comparisons is n(n-1)/2=T=O(n^2)
+//No. of swaps is n(n-1)/2=O(n^2)
+//N/B it's adabtable and stable by default
+{
+    int i,j,x;
+   
+   for(i=1;i<n;i++)//n-1 passes
+   {
+     j=i-1;
+     x=A[i];//take elem to be sorted
+     while(j>-1&&A[j]>x)
+     {
+        A[j+1]=A[j];//copy elem to the foward of j
+        j--;
+     }
+
+     A[j+1]=x;//copy the x elemnt to the right place
+   }
+}
 int main()
 {
-    int A[]={3,7,9,10}, n=4, i;
+    int A[]={11,13,7,2,6,9,4,5,10,3}, n=10, i;
 
-Bubble(A,4);
+Insertion(A,n);
 
-for(i=0;i<4;i++)
+for(i=0;i<10;i++)
  printf("%d ", A[i]);
 
 printf("\n");
