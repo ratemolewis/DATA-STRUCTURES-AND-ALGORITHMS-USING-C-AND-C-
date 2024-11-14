@@ -69,11 +69,42 @@ void SelectionSort(int A[],int n)
         swap(&A[i],&A[k]);//at the end of the inner loop k will be pointing at the smallest elem; swap with i
     }
 }
+
+int partition(int A[],int l, int h)
+//Quick sort partioning procedure, used recursively
+//2 elem are the least that can be partitioned
+//__INT_MAX__, acts at the stopping mart for i, serving as infinity which is the intmax, while sorted ement acts as the upper bound for the left list
+{
+    int pivot=A[l];
+    int i=l, j=h;
+    do{
+    do{i++;}while(A[i]<=pivot);
+        do{j--;}while(A[j]>pivot);
+        
+        if(i<j)swap(&A[i],&A[j]);
+    }while(i<j);
+
+      swap(&A[l],&A[j]);//the element is placed at sorted position, such that smaller and greater elem on the left and right respectively.
+      return j;//the index of the partioned elem
+}
+
+void QuickSort(int A[], int l, int h)
+//Best/Average case(partioning happening in the middle) T=O(nlogn)
+//Worst case(partioning happening at any end) T=O(n^2)
+{
+    int j;
+    if(l<h)//works for atleast two elements
+    {
+        j=partition( A, l,  h);
+        QuickSort(A,l,j);//left list runs fron l to j-1 but j position sorted elem acts as infinity/stoping condition for i
+        QuickSort(A,j+1,h);
+    }
+}
 int main()
 {
-    int A[]={11,13,7,12,16,9,24,5,10,3}, n=10, i;
+    int A[]={11,13,7,12,16,9,24,5,10,3,__INT_MAX__}, n=11, i;
 
-SelectionSort(A,n);
+QuickSort(A,0,10);
 
 for(i=0;i<10;i++)
  printf("%d ", A[i]);
