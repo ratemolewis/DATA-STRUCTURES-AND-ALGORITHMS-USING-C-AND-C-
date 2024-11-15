@@ -100,13 +100,54 @@ void QuickSort(int A[], int l, int h)
         QuickSort(A,j+1,h);
     }
 }
+
+void merge(int A[],int l, int mid, int h)
+//merging two list in a single array
+{ 
+    int i=l,j=mid+1,k=l;
+    int B[100];
+
+    while(i<=mid && j<=h)
+    {
+        if(A[i]<A[j])
+            B[k++]=A[i++];
+        else
+            B[k++]=A[j++];
+    }
+    for(; i<=mid;i++)//copy remaining elem from the firts list
+        B[k++]=A[i];
+    for(; j<=h;j++)//copy remaining elem frim the second bit of the list
+        B[k++]=A[j];
+
+    for(int i=l;i<=h;i++)//copy the sorted two lists from the auxiliary array B back to A
+        A[i]=B[i];
+}
+
+void IMergeSort(int A[], int n)
+{
+    int p, i, l, mid,h;
+    
+    for(p=2;p<=n;p=p*2)//no. of passes O(nlogn) loop
+    {
+        for(i=0;i+p-1<n;i=i+p)//merging all the list in a single pass
+        {
+            l=i;
+            h=i+p-1;
+            mid=(l+h)/2;
+            merge(A,l,mid,h);
+        }
+    }
+    if(p/2<n)//handle odd no. of elem
+        merge(A,0,p/2-1,n-1);
+
+}
 int main()
 {
-    int A[]={11,13,7,12,16,9,24,5,10,3,__INT_MAX__}, n=11, i;
+    int A[]={11,13,7,12,16,9,24,5,10,3}, n=10, i;
 
-QuickSort(A,0,10);
+IMergeSort(A,n);
 
-for(i=0;i<10;i++)
+for(i=0;i<n;i++)
  printf("%d ", A[i]);
 
 printf("\n");
