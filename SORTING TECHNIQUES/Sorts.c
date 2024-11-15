@@ -141,11 +141,24 @@ void IMergeSort(int A[], int n)
         merge(A,0,p/2-1,n-1);
 
 }
+void RMergeSort(int A[],int l,int h)
+//Internally it uses a stack, it creates a tree
+//(Space required A-n,B-n,Stack-log n: (Total=2n+log n)) T=O(nlog n)
+//In comparison based sorting merge sort it the on;y one that uses extra space
+{  int mid;
+    if(l<h)//sort if there is more than one elem(2 or more elem)
+    {
+     mid=(l+h)/2;//find the floor value
+     RMergeSort(A,l,mid);//call on the left list recursively
+     RMergeSort(A,mid+1,h);//call on the right side list after the first list has finishied
+     merge(A,l,mid,h);//lastly after the left and right child of the root, merge in post order
+    }
+}
 int main()
 {
     int A[]={11,13,7,12,16,9,24,5,10,3}, n=10, i;
 
-IMergeSort(A,n);
+RMergeSort(A,0,9);
 
 for(i=0;i<n;i++)
  printf("%d ", A[i]);
@@ -154,4 +167,6 @@ printf("\n");
 
 
     return 0;
+}
+
 }
