@@ -154,11 +154,48 @@ void RMergeSort(int A[],int l,int h)
      merge(A,l,mid,h);//lastly after the left and right child of the root, merge in post order
     }
 }
+
+int findMax(int A[],int n)
+{
+    int max,i;
+    max=-1;
+    for(i=0;i<n;i++)
+    {
+        if(A[i]>max)
+            max=A[i];
+    }
+    return max;
+}
+
+void CountSort(int A[], int n )
+//faster count sort algorithm but takes order of n
+{
+    int i,j,max,*c;
+    max=findMax(A,n);
+     c=(int*)malloc(max+1*sizeof(int));
+
+     for(i=0;i<max+1;i++)//fill count array with '0'
+        c[i]=0;
+     for(i=0;i<n;i++)//increment counters of the respective elem in 'c'
+        c[A[i]]++;
+
+        i=j=0;
+    while(i<max+1)//copy the occurenece back to array 'A'
+    {
+        if(c[i]>0)//loop as long as the value index of array 'c' is not '0'
+        {
+            A[j++]=i;//copy the index value to 'A'
+            c[i]--;//decrement occurence to '0'
+        }else{
+            i++;//increment counter as long as 'o' is found or reached in array 'c'
+        }
+    }
+}
 int main()
 {
     int A[]={11,13,7,12,16,9,24,5,10,3}, n=10, i;
 
-RMergeSort(A,0,9);
+CountSort(A,n);
 
 for(i=0;i<n;i++)
  printf("%d ", A[i]);
@@ -167,6 +204,4 @@ printf("\n");
 
 
     return 0;
-}
-
 }
