@@ -1,3 +1,7 @@
+//"Hashing reduces the search time of both liner and binary search which is O(n) and O(log n) respectively,
+ //reducing it.However, deletion is not recommende in hashing, a flag is used to represent deletion of data"
+
+
 #ifndef Chains_h
 #define Chains_h
 #include<stdlib.h>
